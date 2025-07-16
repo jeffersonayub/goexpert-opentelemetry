@@ -1,0 +1,50 @@
+version: "3"
+
+services:
+  service-a:
+    container_name: service_a
+    build:
+      context: ./servico-a
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - zipkin
+    networks:
+      - vix-network
+
+  service-b:
+    container_name: service_b
+    build:
+      context: ./servico-b
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8081"
+    depends_on:
+      - zipkin
+    networks:
+      - vix-network
+
+  otel-collector:
+    image: otel/opentelemetry-collector-contrib
+    command: [ "--config=/etc/otel/otel-collector-config.yaml" ]
+    volumes:
+      - ./.docker/otel-collector-config.yaml:/etc/otel/otel-collector-config.yaml
+    container_name: otel-collector
+    ports:
+      - "4317:4317"
+      - "55679:55679"
+    networks:
+      - vix-network
+
+  zipkin:
+    image: openzipkin/zipkin
+    container_name: zipkin
+    ports:
+      - "9411:9411"
+    networks:
+      - vix-network
+
+networks:
+  vix-network:
+    driver: bridge
