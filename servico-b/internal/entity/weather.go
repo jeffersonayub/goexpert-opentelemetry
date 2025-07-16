@@ -27,7 +27,7 @@ type Response struct {
 	Temp_K float64 `json:"temp_K"`
 }
 
-const weather_key = "f808ee977e1648a8ac6145710251407" // Replace with your actual API key
+const weather_key = "WEATHER_API_KEY" // Replace with your actual API key
 
 func GetWeather(location string) (Response, error) {
 	var weather Weather
