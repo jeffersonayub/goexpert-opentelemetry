@@ -3,7 +3,6 @@ module github.com/jeffersonayub/goexpert-opentelemetry/servico-a
 go 1.24.1
 
 require (
-	github.com/go-chi/chi v1.5.5
 	go.opentelemetry.io/otel v1.37.0
 	go.opentelemetry.io/otel/exporters/zipkin v1.37.0
 	go.opentelemetry.io/otel/sdk v1.37.0
